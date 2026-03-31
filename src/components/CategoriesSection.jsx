@@ -1,51 +1,92 @@
-import { Building2, Hotel, Hospital, GraduationCap } from "lucide-react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function CategoriesSection() {
-  const categories = [
-    {
-      icon: <Building2 className="w-10 h-10 text-green-600" />,
-      title: "Real Estate",
-      desc: "Builders, property dealers, apartment developers, and plot sellers.",
-    },
-    {
-      icon: <Hotel className="w-10 h-10 text-green-600" />,
-      title: "Hotels",
-      desc: "Luxury hotels, budget stays, resorts, and business accommodations.",
-    },
-    {
-      icon: <Hospital className="w-10 h-10 text-green-600" />,
-      title: "Hospitals",
-      desc: "Multi-speciality hospitals, clinics, emergency care, and health services.",
-    },
-    {
-      icon: <GraduationCap className="w-10 h-10 text-green-600" />,
-      title: "Education",
-      desc: "Schools, colleges, coaching institutes, and training centers.",
-    },
-  ];
+const categories = [
+  {
+    title: "Real Estate",
+    subtitle: "PROPERTY, SALES",
+    slug: "real-estate",
+    image:
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Hostels",
+    subtitle: "ROOMS, STAY",
+    slug: "hostels",
+    image:
+      "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Hospitals / Clinics",
+    subtitle: "HEALTHCARE",
+    slug: "hospitals",
+    image:
+      "https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Overseas",
+    subtitle: "ABROAD, CONSULTING",
+    slug: "overseas",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    title: "Education Institutes",
+    subtitle: "LEARNING, COURSES",
+    slug: "education",
+    image:
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
+  },
+];
 
+function CategoriesPage() {
   return (
-    <section className="bg-white py-16 px-4 sm:px-6">
-      <div className="max-w-[1200px] mx-auto">
-        <h2 className="text-3xl font-bold text-center text-[#11183f] mb-10">
-          Our Categories
-        </h2>
+    <section className="py-6 sm:py-8">
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-4">
+        <div className="mb-10 text-center">
+          <h1 className="text-3xl font-bold text-[#1f2340] sm:text-4xl">
+            Browse Data Categories
+          </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <p className="mx-auto mt-4 max-w-[620px] text-sm leading-7 text-[#64748b]">
+            Explore admin-collected business data across top categories. Users
+            can view, choose, and purchase verified datasets easily.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
           {categories.map((item, index) => (
-            <div
+            <Link
               key={index}
-              className="rounded-2xl bg-white p-6 shadow-sm border border-gray-100 hover:shadow-md transition"
+              to={`/category/${item.slug}`}
+              className="group flex flex-col items-center text-center"
             >
-              <div className="mb-4">{item.icon}</div>
-              <h3 className="text-xl font-bold text-[#11183f] mb-2">
+              <div className="w-full max-w-[220px]">
+                <div className="overflow-hidden rounded-[22px] border border-[#e2e8f0] bg-white shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg">
+                  <div className="relative h-[300px] w-full overflow-hidden bg-[#eff6ff]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#eff6ff]/20 to-transparent" />
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="mt-4 flex h-[48px] items-center justify-center text-[14px] font-semibold uppercase tracking-wide text-[#1f2340]">
                 {item.title}
               </h3>
-              <p className="text-sm text-gray-600 leading-6">{item.desc}</p>
-            </div>
+
+              <p className="mt-1 h-[18px] text-[10px] font-semibold tracking-[0.18em] text-[#ef4444]">
+                {item.subtitle}
+              </p>
+            </Link>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+export default CategoriesPage;
